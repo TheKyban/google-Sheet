@@ -1,0 +1,12 @@
+.fileMenuWrapper {
+    display: flex;
+    gap: 1.5rem;
+    background-color: #218C74;
+    padding: 1rem 2rem;
+}
+
+.fileMenuWrapper>h1 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #fff;
+}

@@ -1,0 +1,42 @@
+.editMenuWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #ECF0F1;
+    padding: 0.5rem 2rem;
+}
+
+.editMenuWrapper select {
+    padding: 5px;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.editMenuWrapper img {
+    width: 25px;
+    box-sizing: content-box;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.copyCutPaste {
+    padding: 5px;
+}
+.editMenuWrapper .copyCutPaste:hover {
+    background-color: #d0d6d8;
+}
+
+.colorSelector {
+    position: relative;
+}
+
+.colorSelector>input {
+    cursor: pointer;
+    width: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
