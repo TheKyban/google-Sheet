@@ -1,0 +1,25 @@
+.FormulaBarWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0.5rem 2rem;
+    background-color: #ECF0F1;
+}
+
+
+
+.FormulaBarWrapper input {
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+    padding: 5px 10px;
+    border: 1px solid #f1afaf;
+    border-radius: 5px;
+}
+
+.FormulaBarWrapper input:first-of-type {
+    width: 3rem;
+}
+.FormulaBarWrapper img {
+    width: 30px;
+}
