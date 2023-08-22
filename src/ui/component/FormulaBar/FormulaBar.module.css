@@ -18,7 +18,8 @@
 }
 
 .FormulaBarWrapper input:first-of-type {
-    width: 3rem;
+    width: 5rem;
+    text-align: center;
 }
 .FormulaBarWrapper img {
     width: 30px;

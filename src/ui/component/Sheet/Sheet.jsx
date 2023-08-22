@@ -1,6 +1,9 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback } from "react";
 import style from "./Sheet.module.css";
 import { rows, columns } from '../../../constants/constant';
+import { useDispatch } from "react-redux";
+import { setCellAndFormula } from "../../../controllers/store/slices/formulaBarSlice";
+
 
 const Sheet = () => {
     return (
@@ -17,18 +20,13 @@ const Sheet = () => {
 };
 
 
-const Cells = memo(() => {
-
-
-
-
+const Cells = () => {
     return (
         <>
             {Array(rows)
                 .fill("")
                 .map((e, i) => (
                     <div
-                        className="flex items-center last:border-b-2 border-color-1"
                         key={i}
                     >
                         {Array(columns)
@@ -39,9 +37,6 @@ const Cells = memo(() => {
                                     <Cell
                                         key={`${i}${j}`}
                                         name={`${Alphabet}${i + 1}`}
-                                        address={[i, j]}
-                                    // blurHandler={blurHandler}
-                                    // clickHandler={clickHandler}
                                     />
                                 );
                             })}
@@ -49,32 +44,17 @@ const Cells = memo(() => {
                 ))}
         </>
     );
-});
+};
 
-const Cell = memo(({ name, address }) => {
-    const db = {};
-    const [clicked, setClicked] = useState(false);
+const Cell = memo(({ name, db }) => {
+    const dispatch = useDispatch();
 
     const clickHandler = useCallback(() => {
-        if (!clicked) {
-            setClicked(true);
-            console.log("clicked");
-        }
-    }, [clicked]);
-
-
-    const blurHandler = useCallback(() => {
-        if (clicked) {
-            setClicked(false);
-            console.log("not clicked")
-        }
-    }, [clicked]);
-
-
+        dispatch(setCellAndFormula({ name: String(name), formula: db?.formula ? db.formula : "" }));
+    }, []);
 
     const changeHandler = useCallback(() => { }, []);
     console.log("render");
-
 
     return (
         <input
@@ -92,7 +72,6 @@ const Cell = memo(({ name, address }) => {
                 backgroundColor: `${db?.bg}`
             }}
             onClick={(e) => clickHandler(e, db)}
-            onBlur={blurHandler}
             onChange={changeHandler}
             value={db?.value}
         ></input>
