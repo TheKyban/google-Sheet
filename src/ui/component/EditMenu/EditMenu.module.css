@@ -3,7 +3,8 @@
     align-items: center;
     gap: 20px;
     background-color: #ECF0F1;
-    padding: 0.5rem 2rem;
+    padding: 0.6rem 1rem 0.1rem;
+    /* border-bottom: 1px solid #e4c9c9; */
 }
 
 .editMenuWrapper select {
@@ -24,6 +25,7 @@
 .copyCutPaste {
     padding: 5px;
 }
+
 .editMenuWrapper .copyCutPaste:hover {
     background-color: #d0d6d8;
 }

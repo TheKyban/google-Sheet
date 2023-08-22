@@ -1,15 +1,11 @@
-import { useSelector } from "react-redux";
-import { rows, columns } from "../constant";
-import React, { memo, useCallback, useMemo, useState } from "react";
-import { useFormulaContext } from "../SheetContext";
+import React, { memo, useCallback, useState } from "react";
+import style from "./Sheet.module.css";
+import { rows, columns } from '../../../constants/constant';
 
 const Sheet = () => {
-
     return (
         <div
-            className={
-                "bg-bg-2 h-[calc(100vh-44px-48px-48px-36px)] w-full overflow-auto flex"
-            }
+            className={style.sheetWrapper}
         >
             <NumberColumn />
             <div>
@@ -20,69 +16,11 @@ const Sheet = () => {
     );
 };
 
-const NumberColumn = () => {
-    return (
-        <div>
-            <span className="w-10 h-8 bg-bg-1 block border-2 border-bg-1 text-center"></span>
-            <div className="flex flex-col">
-                {Array(rows)
-                    .fill(" ")
-                    .map((v, i) => (
-                        <span
-                            className=" border-color-1 border-2 border-b-0 last:border-b-2 w-10  h-8 flex items-center justify-center"
-                            key={`Number${i}`}
-                        >
-                            {i + 1}
-                        </span>
-                    ))}
-            </div>
-        </div>
-    );
-};
-
-const AlphabetRow = () => {
-    return (
-        <div className="flex items-center">
-            {Array(columns)
-                .fill("")
-                .map((v, i) => {
-                    let Alphabet = String.fromCharCode(65 + i);
-                    return (
-                        <span
-                            key={`Alpha${i}`}
-                            className="border-2 border-color-1 border-l-0 border-b-0 w-20 h-8 flex items-center justify-center"
-                        >
-                            {Alphabet}
-                        </span>
-                    );
-                })}
-        </div>
-    );
-};
 
 const Cells = memo(() => {
-    const db = useSelector(slice => slice.db.db);
-    console.log("rendering");
-
-    const [clicked, setClicked] = useState(false);
-    const { setCell, setFormula } = useFormulaContext();
 
 
 
-    const clickHandler = useCallback((e, db) => {
-        console.log(db?.alignment);
-
-        if (!clicked) {
-            setClicked(true);
-            const name = e.target.name;
-            setCell(name);
-            setFormula(db?.formula);
-        }
-    });
-
-    const blurHandler = useCallback(() => {
-        setClicked(false);
-    }, []);
 
     return (
         <>
@@ -101,9 +39,9 @@ const Cells = memo(() => {
                                     <Cell
                                         key={`${i}${j}`}
                                         name={`${Alphabet}${i + 1}`}
-                                        db={db?.[i]?.[j]}
-                                        blurHandler={blurHandler}
-                                        clickHandler={clickHandler}
+                                        address={[i, j]}
+                                    // blurHandler={blurHandler}
+                                    // clickHandler={clickHandler}
                                     />
                                 );
                             })}
@@ -113,15 +51,36 @@ const Cells = memo(() => {
     );
 });
 
-const Cell = memo(({ name, db, blurHandler, clickHandler }) => {
-    console.log(db?.alignment);
+const Cell = memo(({ name, address }) => {
+    const db = {};
+    const [clicked, setClicked] = useState(false);
+
+    const clickHandler = useCallback(() => {
+        if (!clicked) {
+            setClicked(true);
+            console.log("clicked");
+        }
+    }, [clicked]);
+
+
+    const blurHandler = useCallback(() => {
+        if (clicked) {
+            setClicked(false);
+            console.log("not clicked")
+        }
+    }, [clicked]);
+
+
+
+    const changeHandler = useCallback(() => { }, []);
+    console.log("render");
 
 
     return (
         <input
             type="text"
             name={name}
-            className={`outline-none border-2 border-color-1  border-l-0 border-b-0 w-20 h-8`}
+            className={style.Cell}
             style={{
                 fontSize: `${db?.fontSize}px`,
                 fontFamily: `${db?.fontFamily}`,
@@ -134,8 +93,54 @@ const Cell = memo(({ name, db, blurHandler, clickHandler }) => {
             }}
             onClick={(e) => clickHandler(e, db)}
             onBlur={blurHandler}
+            onChange={changeHandler}
+            value={db?.value}
         ></input>
     );
 });
+
+
+
+
+const NumberColumn = () => {
+    return (
+        <div>
+            <span className={style.NumberColumnEmptyCell}></span>
+            <div className={style.NumberColumn}>
+                {Array(rows)
+                    .fill(" ")
+                    .map((v, i) => (
+                        <span
+                            className={style.NumberColumnCell}
+                            key={`Number${i}`}
+                        >
+                            {i + 1}
+                        </span>
+                    ))}
+            </div>
+        </div>
+    );
+};
+
+const AlphabetRow = () => {
+    return (
+        <div className={style.AlphabetRow}>
+            {Array(columns)
+                .fill("")
+                .map((v, i) => {
+                    let Alphabet = String.fromCharCode(65 + i);
+                    return (
+                        <span
+                            key={`Alpha${i}`}
+                            className={style.AlphabetCell}
+                        >
+                            {Alphabet}
+                        </span>
+                    );
+                })}
+        </div>
+    );
+};
+
 
 export default Sheet;

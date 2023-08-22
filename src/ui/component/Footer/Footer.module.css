@@ -1,0 +1,22 @@
+.footerWrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 0.2rem;
+    background-color: #ECF0F1;
+}
+
+.footerWrapper img {
+    width: 30px;
+    cursor: pointer;
+}
+.sheets {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.sheet {
+    font-weight: 600;
+    border-bottom: 2px solid #d47b7b;
+}

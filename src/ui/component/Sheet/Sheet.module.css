@@ -1,0 +1,75 @@
+.sheetWrapper {
+    background-color: #ECF0F1;
+    height: calc(80vh);
+    overflow: auto;
+    display: flex;
+}
+
+
+/* Cell */
+
+.Cell {
+    /* `outline-none border-2 border-color-1  border-l-0 border-b-0 w-20 h-8` */
+    outline: none;
+    border: 1px solid #e4c9c9;
+    width: 5rem;
+    height: 2rem;
+    border-right: none;
+    border-top: none;
+}
+
+.Cell:last-of-type {
+    border-right: 1px solid #e4c9c9;
+}
+
+/* Number Column */
+
+.NumberColumnEmptyCell {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    background-color: #b3aca3;
+}
+
+.NumberColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.NumberColumn .NumberColumnCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e4c9c9;
+    border-right: none;
+    border-bottom: none;
+    height: 2rem;
+    width: 2rem;
+
+}
+
+.NumberColumn .NumberColumnCell:last-of-type {
+    border-bottom: 1px solid #e4c9c9;
+}
+
+/* Alphabet Row */
+
+.AlphabetRow {
+    display: flex;
+    align-items: center;
+}
+
+.AlphabetRow .AlphabetCell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 2rem;
+    border: 1px solid #e4c9c9;
+    border-right: none;
+}
+
+.AlphabetRow .AlphabetCell:last-of-type {
+    border-right: 1px solid #e4c9c9;
+
+}
